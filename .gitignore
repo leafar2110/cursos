@@ -1,0 +1,16 @@
+commans.txt
+portafolio/node_modules
+portafolio/public/hot
+portafolio/public/storage
+portafolio/storage/*.key
+portafolio/vendor
+portafolio/.env
+portafolio/.env.backup
+portafolio/.phpunit.result.cache
+portafolio/docker-compose.override.yml
+portafolio/Homestead.json
+portafolio/Homestead.yaml
+portafolio/npm-debug.log
+portafolio/yarn-error.log
+/.idea
+/.vscode

@@ -1,0 +1,5 @@
+.git
+.idea
+.env.prod
+portafolio/storage/logs
+portafolio/storage/cache

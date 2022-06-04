@@ -1,0 +1,50 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: admin
+        uid: 1000
+      context: ./
+      dockerfile: ./compose/local/laravel/Dockerfile
+    container_name: portafolio-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./portafolio:/var/www
+    ports:
+      - 9000:80
+    networks:
+      - portafolio
+
+  db:
+    image: mysql:5.7
+    container_name: portafolio-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: portafolio
+      MYSQL_ROOT_PASSWORD: portafolio
+      MYSQL_PASSWORD: portafolio
+      MYSQL_USER: portafolio
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./compose/local/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - portafolio
+
+  nginx:
+    image: nginx:alpine
+    container_name: portafolio-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./portafolio:/var/www
+      - ./compose/local/nginx:/etc/nginx/conf.d
+    networks:
+      - portafolio
+
+networks:
+  portafolio:
+    driver: bridge
